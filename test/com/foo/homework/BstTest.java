@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class BstTest {
     @Test
     public void testInOrder() {
-        BST tree = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
+        BST tree = BST.makeFromString("45 10 7 12 90 50");
         KeyAppendingVisitor v = new KeyAppendingVisitor();
         tree.inOrder_traversal(v);
         Assertions.assertEquals("7 10 12 45 50 90", v.asString());
@@ -14,7 +14,7 @@ public class BstTest {
 
     @Test
     public void testPreOrder() {
-        BST tree = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
+        BST tree = BST.makeFromString("45 10 7 12 90 50");
         KeyAppendingVisitor v = new KeyAppendingVisitor();
         tree.preOrder_traversal(v);
         Assertions.assertEquals("45 10 7 12 90 50", v.asString());
@@ -22,7 +22,7 @@ public class BstTest {
 
     @Test
     public void testPostOrder() {
-        BST tree = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
+        BST tree = BST.makeFromString("45 10 7 12 90 50");
         KeyAppendingVisitor v = new KeyAppendingVisitor();
         tree.postOrder_traversal(v);
         Assertions.assertEquals("7 12 10 50 90 45", v.asString());
@@ -30,7 +30,7 @@ public class BstTest {
 
     @Test
     public void testDeleteLeafNodes() {
-        BST tree = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
+        BST tree = BST.makeFromString("45 10 7 12 90 50");
         KeyAppendingVisitor v = new KeyAppendingVisitor();
         tree.inOrder_traversal(v);
         Assertions.assertEquals("7 10 12 45 50 90", v.asString());
@@ -46,7 +46,7 @@ public class BstTest {
 
     @Test
     public void testDeleteNodeWithTwoChildren() {
-        BST tree = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
+        BST tree = BST.makeFromString("45 10 7 12 90 50");
         KeyAppendingVisitor v = new KeyAppendingVisitor();
         tree.inOrder_traversal(v);
         Assertions.assertEquals("7 10 12 45 50 90", v.asString());
@@ -58,7 +58,7 @@ public class BstTest {
 
     @Test
     public void testSearch() {
-        BST tree = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
+        BST tree = BST.makeFromString("45 10 7 12 90 50");
         Assertions.assertFalse(tree.search(1));
         Assertions.assertTrue(tree.search(50));
         Assertions.assertTrue(tree.search(12));

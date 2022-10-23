@@ -8,10 +8,10 @@ public class BST {
         root = null;
     }
 
-    public static BST makeFromArray(int[] array) {
+    public static BST makeFromString(String input) {
         BST tree = new BST();
-        for (int item : array) {
-            tree.insert(item);
+        for (String item : input.split(" ")) {
+            tree.insert(Integer.parseInt(item));
         }
         return tree;
     }
