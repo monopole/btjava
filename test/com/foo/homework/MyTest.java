@@ -26,20 +26,9 @@ public class MyTest {
         Assertions.assertEquals("2 3", asString(l));
     }
 
-    private BST makeTree() {
-        BST bst = new BST();
-        bst.insert(45);
-        bst.insert(10);
-        bst.insert(7);
-        bst.insert(12);
-        bst.insert(90);
-        bst.insert(50);
-        return bst;
-    }
-
     @Test
     public void testInOrder() {
-        BST bst = makeTree();
+        BST bst = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
         List<Integer> l = new ArrayList<>();
         bst.inOrder_traversal(l);
         Assertions.assertEquals("7 10 12 45 50 90", asString(l));
@@ -47,52 +36,52 @@ public class MyTest {
 
     @Test
     public void testPreOrder() {
-        BST bst = makeTree();
+        BST bst = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
         List<Integer> l = new ArrayList<>();
         bst.preOrder_traversal(l);
-        Assertions.assertEquals("7 10 12 45 50 90", asString(l));
+        Assertions.assertEquals("45 10 7 12 90 50", asString(l));
     }
 
     @Test
     public void testPostOrder() {
-        BST bst = makeTree();
+        BST bst = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
         List<Integer> l = new ArrayList<>();
         bst.postOrder_traversal(l);
-        Assertions.assertEquals("7 10 12 45 50 90", asString(l));
+        Assertions.assertEquals("7 12 10 50 90 45", asString(l));
     }
 
     @Test
-    public void testDeleteLeaves() {
-        BST bst = makeTree();
+    public void testDeleteLeafNodes() {
+        BST bst = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
         List<Integer> l = new ArrayList<>();
         bst.inOrder_traversal(l);
         Assertions.assertEquals("7 10 12 45 50 90", asString(l));
         bst.deleteKey(12);
         l.clear();
         bst.inOrder_traversal(l);
-        Assertions.assertEquals("7 10 12 45 50 90", asString(l));
+        Assertions.assertEquals("7 10 45 50 90", asString(l));
         bst.deleteKey(90);
         l.clear();
         bst.inOrder_traversal(l);
-        Assertions.assertEquals("7 10 12 45 50 90", asString(l));
-
+        Assertions.assertEquals("7 10 45 50", asString(l));
     }
 
     @Test
     public void testDeleteNodeWithTwoChildren() {
-        BST bst = makeTree();
+        BST bst = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
         List<Integer> l = new ArrayList<>();
         bst.inOrder_traversal(l);
         Assertions.assertEquals("7 10 12 45 50 90", asString(l));
         bst.deleteKey(45);
         l.clear();
         bst.inOrder_traversal(l);
-        Assertions.assertEquals("7 10 12 45 50 90", asString(l));
+        Assertions.assertEquals("7 10 12 50 90", asString(l));
     }
 
     @Test
     public void testSearch() {
-        BST bst = makeTree();
+        BST bst = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});
+        Assertions.assertFalse(bst.search(1));
         Assertions.assertTrue(bst.search(50));
         Assertions.assertTrue(bst.search(12));
         Assertions.assertFalse(bst.search(9999));
@@ -103,12 +92,12 @@ public class MyTest {
         BST tree = BST.makeExample();
         List<Integer> l = new ArrayList<>();
         tree.preOrder_traversal(l);
-        Assertions.assertEquals("7 10 12 45 50 90", asString(l));
+        Assertions.assertEquals("45 10 7 12 90", asString(l));
         l.clear();
         tree.inOrder_traversal(l);
-        Assertions.assertEquals("7 10 12 45 50 90", asString(l));
+        Assertions.assertEquals("7 10 12 45 90", asString(l));
         l.clear();
         tree.postOrder_traversal(l);
-        Assertions.assertEquals("7 10 12 45 50 90", asString(l));
+        Assertions.assertEquals("7 12 10 90 45", asString(l));
     }
 }
