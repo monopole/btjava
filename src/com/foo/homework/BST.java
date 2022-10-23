@@ -1,75 +1,90 @@
 package com.foo.homework;
 
+import java.util.List;
+
 public class BST {
-    //node class that defines src.homework.BST node
-    // src.homework.BST root node
-    Node root;
+    private Node root;
 
     // Constructor for src.homework.BST =>initial empty tree
-    BST(){
+    public BST() {
         root = null;
     }
+
+    public static BST makeExample() {
+        BST tree = new BST();
+        tree.root = new Node(45);
+        tree.root.left = new Node(10);
+        tree.root.right = new Node(90);
+        tree.root.left.left = new Node(7);
+        tree.root.left.right = new Node(12);
+        return tree;
+    }
+
     //delete a node from src.homework.BST
-    void deleteKey(int key) {
+    public void deleteKey(int key) {
 
     }
 
-    int minValue(Node root)  {
+    private int minValue(Node root) {
         return 0;
     }
 
     // insert a node in src.homework.BST
-    void insert(int key)  {
-        root = insert_Recursive(root, key);
+    public void insert(int key) {
+        root = insertRecursive(root, key);
     }
 
-    //recursive insert function
-    Node insert_Recursive(Node root, int key) {
-        //tree is empty
-        if (root == null) {
-            root = new Node(key);
-            return root;
+    // recursively insert a node
+    private Node insertRecursive(Node n, int key) {
+        if (n == null) {
+            return new Node(key);
         }
-        //traverse the tree
-        if (key < root.key)     //insert in the left subtree
-            root.left = insert_Recursive(root.left, key);
-        else if (key > root.key)    //insert in the right subtree
-            root.right = insert_Recursive(root.right, key);
-        // return pointer
-        return root;
+        if (key < n.key) {
+            n.left = insertRecursive(n.left, key);
+        } else {
+            if (key > n.key) {
+                n.right = insertRecursive(n.right, key);
+            }
+        }
+        return n;
     }
 
-    boolean search(int key)  {
+    public boolean search(int key) {
         return false;
     }
 
+    public void postOrder_traversal(List<Integer> list) {
+        postOrder(root);
+    }
+
     //PostOrder Traversal - Left:Right:rootNode (LRn)
-    void postOrder(Node node)  {
+    private void postOrder(Node node) {
 
     }
-    // InOrder Traversal - Left:rootNode:Right (LnR)
-    void inOrder(Node node)  {
-        if (node == null)
-            return;
-        //first traverse left subtree recursively
-        inOrder(node.left);
 
-        //then go for root node
-        System.out.print(node.key + " ");
+
+    public void inOrder_traversal(List<Integer> list) {
+        inOrder(root, list);
+    }
+
+    // InOrder Traversal - Left:rootNode:Right (LnR)
+    private void inOrder(Node node, List<Integer> list) {
+        if (node == null) return;
+        //first traverse left subtree recursively
+        inOrder(node.left, list);
+
+        list.add(node.key);
 
         //next traverse right subtree recursively
-        inOrder(node.right);
+        inOrder(node.right, list);
     }
+
+    public void preOrder_traversal(List<Integer> list) {
+        preOrder(root);
+    }
+
     //PreOrder Traversal - rootNode:Left:Right (nLR)
-    void preOrder(Node node)  {
+    private void preOrder(Node node) {
 
     }
-
-    // Wrappers for recursive functions
-    void postOrder_traversal()  {
-        postOrder(root);  }
-    void inOrder_traversal() {
-        inOrder(root);   }
-    void preOrder_traversal() {
-        preOrder(root);  }
 }
