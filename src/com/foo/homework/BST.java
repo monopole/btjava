@@ -1,7 +1,5 @@
 package com.foo.homework;
 
-import java.util.List;
-
 // BST implements a binary search tree.
 public class BST {
     private Node root;
@@ -27,7 +25,10 @@ public class BST {
             return null;
         }
         if (key == n.key) {
-            return null;
+            TreeBuildingVisitor v = new TreeBuildingVisitor();
+            postOrder(n.left, v);
+            postOrder(n.right, v);
+            return v.getTree().root;
         }
         if (key < n.key) {
             n.left = recurseToDelete(n.left, key);
@@ -60,10 +61,10 @@ public class BST {
 
     // search returns true if the argument is in the tree, else false.
     public boolean search(int key) {
-        return searchRecursive(root, key);
+        return recurseToSearch(root, key);
     }
 
-    private boolean searchRecursive(Node n, int key) {
+    private boolean recurseToSearch(Node n, int key) {
         if (n == null) {
             return false;
         }
@@ -71,45 +72,45 @@ public class BST {
             return true;
         }
         if (key < n.key) {
-            return searchRecursive(n.left, key);
+            return recurseToSearch(n.left, key);
         }
-        return searchRecursive(n.right, key);
+        return recurseToSearch(n.right, key);
     }
 
     // PostOrder Traversal - Left:Right:rootNode (LRn)
-    public void postOrder_traversal(List<Integer> list) {
-        postOrder(root, list);
+    public void postOrder_traversal(NodeVisitor v) {
+        postOrder(root, v);
     }
 
-    private void postOrder(Node node, List<Integer> list) {
+    private void postOrder(Node node, NodeVisitor v) {
         if (node == null) return;
-        postOrder(node.left, list);
-        postOrder(node.right, list);
-        list.add(node.key);
+        postOrder(node.left, v);
+        postOrder(node.right, v);
+        v.visit(node);
     }
 
     // InOrder Traversal - Left:rootNode:Right (LnR)
-    public void inOrder_traversal(List<Integer> list) {
-        inOrder(root, list);
+    public void inOrder_traversal(NodeVisitor v) {
+        inOrder(root, v);
     }
 
-    private void inOrder(Node node, List<Integer> list) {
+    private void inOrder(Node node, NodeVisitor v) {
         if (node == null) return;
-        inOrder(node.left, list);
-        list.add(node.key);
-        inOrder(node.right, list);
+        inOrder(node.left, v);
+        v.visit(node);
+        inOrder(node.right, v);
     }
 
     // PreOrder Traversal - rootNode:Left:Right (nLR)
-    public void preOrder_traversal(List<Integer> list) {
-        preOrder(root, list);
+    public void preOrder_traversal(NodeVisitor v) {
+        preOrder(root, v);
     }
 
-    private void preOrder(Node node, List<Integer> list) {
+    private void preOrder(Node node, NodeVisitor v) {
         if (node == null) return;
-        list.add(node.key);
-        preOrder(node.left, list);
-        preOrder(node.right, list);
+        v.visit(node);
+        preOrder(node.left, v);
+        preOrder(node.right, v);
     }
 
     public static BST makeExample() {
