@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BstTest {
-
     @Test
     public void testInOrder() {
         BST tree = BST.makeFromArray(new int[]{45, 10, 7, 12, 90, 50});

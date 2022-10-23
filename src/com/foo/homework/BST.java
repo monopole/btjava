@@ -10,18 +10,29 @@ public class BST {
 
     public static BST makeFromArray(int[] array) {
         BST tree = new BST();
-        for (int item : array ) {
+        for (int item : array) {
             tree.insert(item);
         }
         return tree;
     }
 
+    public static BST makeExample() {
+        BST tree = new BST();
+        tree.root = new Node(45);
+        tree.root.left = new Node(10);
+        tree.root.left.left = new Node(7);
+        tree.root.left.right = new Node(12);
+        tree.root.right = new Node(90);
+        return tree;
+    }
+
+    // delete an entry if exists
     public void deleteKey(int key) {
         root = recurseToDelete(root, key);
     }
+
     private Node recurseToDelete(Node n, int key) {
         if (n == null) {
-            // Not found in tree, nothing to do.
             return null;
         }
         if (key == n.key) {
@@ -43,7 +54,6 @@ public class BST {
         root = recurseToInsert(root, key);
     }
 
-    // recursively insert a node
     private Node recurseToInsert(Node n, int key) {
         if (n == null) {
             return new Node(key);
@@ -111,15 +121,5 @@ public class BST {
         v.visit(node);
         preOrder(node.left, v);
         preOrder(node.right, v);
-    }
-
-    public static BST makeExample() {
-        BST tree = new BST();
-        tree.root = new Node(45);
-        tree.root.left = new Node(10);
-        tree.root.left.left = new Node(7);
-        tree.root.left.right = new Node(12);
-        tree.root.right = new Node(90);
-        return tree;
     }
 }
